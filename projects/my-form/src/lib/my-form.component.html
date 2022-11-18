@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+    <mat-form-field *ngFor="let input of config">
+        <mat-label [attr.for]="input.key ? input.key : input.label">{{ input.label }}</mat-label>
+        <input matInput 
+            [type]="input.type"
+            [min]="input.options?.length ? input.options?.length : null"
+            [max]="input.options?.length ? input.options?.length : null"
+            [type]="input.type"
+            [placeholder]="input.options?.placeholder ? input.options?.placeholder! : ''"
+            [formControlName]="input.key ? input.key : input.label">
+        <mat-error *ngIf="getInputControl(input.key ? input.key : input.label)?.hasError('required')">{{ input.label }} est obligatoire</mat-error>
+        <mat-error *ngIf="getInputControl(input.key ? input.key : input.label)?.hasError('maxlength')">{{ input.label }} require {{ input.options?.length }} au maximum caractères</mat-error>
+        <mat-error *ngIf="getInputControl(input.key ? input.key : input.label)?.hasError('minlength')">{{ input.label }} require {{ input.options?.length }} au minimum caractères</mat-error>
+    </mat-form-field>
+</form>
