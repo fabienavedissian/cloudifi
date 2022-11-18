@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 import { pairwise } from 'rxjs';
 import { FormBase } from './my-form.interface';
 import { MyFormService } from './my-form.service';
@@ -31,7 +31,7 @@ export class MyFormComponent implements OnInit {
     this.valueChanges.emit(this.form.value);
   }
 
-  public getInputControl(input: string) {
+  public getInputControl(input: string): AbstractControl | null {
     return this.form.get(input);
   }
 
